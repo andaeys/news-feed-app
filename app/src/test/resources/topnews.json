@@ -1,0 +1,32 @@
+{
+  "status": "ok",
+  "totalResults": 2,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Yahoo Entertainment"
+      },
+      "author": "Frank Schwab",
+      "title": "Eagles defense gives up a game-winning drive to Drew Lock's Seahawks - Yahoo Sports",
+      "description": "The Eagles' defense was good until it needed to be.",
+      "url": "https://sports.yahoo.com/eagles-defense-gives-up-a-game-winning-drive-to-drew-lock-seahawks-041934238.html",
+      "urlToImage": "https://s.yimg.com/ny/api/res/1.2/hJZZdK.VdFc7s7vAbBLvMA--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://s.yimg.com/os/creatr-uploaded-images/2023-12/bfb60620-9e25-11ee-bfff-5259d6d3eb17",
+      "publishedAt": "2023-12-19T14:11:12Z",
+      "content": "The Philadelphia Eagles did pretty much everything right on defense for the first 58 minutes of Monday night's game. But they can't totally hide a secondary that has surprisingly cratered this season… [+4151 chars]"
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "The Athletic"
+      },
+      "author": "Ted Nguyen",
+      "title": "NFL Week 15 best and worst coaching decisions: Bucs’ plan fuels Baker Mayfield’s big day - The Athletic",
+      "description": "Plus, the Bills and Dolphins come up with brilliant rushing strategies, Mike Tomlin punts the game away and more Kadarius Toney problems.",
+      "url": "https://theathletic.com/5145327/2023/12/19/nfl-week-15-results-scores-coaching-decisions/",
+      "urlToImage": "https://cdn.theathletic.com/app/uploads/2023/12/18194309/1219Cover7CoachingDaveCanales.jpg",
+      "publishedAt": "2023-12-19T13:54:27Z",
+      "content": "Cover 7 | Tuesday A daily NFL destination that provides in-depth analysis of footballs biggest stories. Each Tuesday, Ted Nguyen analyzes the best and worst coaching decisions he saw during the weeks… [+12715 chars]"
+    }
+  ]
+}
