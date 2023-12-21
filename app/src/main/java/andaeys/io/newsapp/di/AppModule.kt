@@ -6,6 +6,7 @@ import andaeys.io.newsapp.domain.FetchTopNews
 import andaeys.io.newsapp.domain.FetchTopNewsImpl
 import andaeys.io.newsapp.repository.TopNewsRepository
 import andaeys.io.newsapp.repository.TopNewsRepositoryImpl
+import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -21,4 +22,8 @@ val repositoryModule = module {
 
 val domainModule = module {
     single<FetchTopNews> {FetchTopNewsImpl(get())}
+}
+
+val viewModelModule = module {
+    factory { TopNewsViewModel(get())}
 }

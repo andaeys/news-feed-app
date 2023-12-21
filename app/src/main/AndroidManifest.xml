@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".NewsApplication"
         android:allowBackup="true"
@@ -14,9 +16,9 @@
         android:theme="@style/Theme.TopHeadlineNews"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.TopNewsActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_top_news"
             android:theme="@style/Theme.TopHeadlineNews">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

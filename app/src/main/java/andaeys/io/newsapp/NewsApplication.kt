@@ -3,6 +3,7 @@ package andaeys.io.newsapp
 import andaeys.io.newsapp.di.domainModule
 import andaeys.io.newsapp.di.networkModule
 import andaeys.io.newsapp.di.repositoryModule
+import andaeys.io.newsapp.di.viewModelModule
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -14,7 +15,7 @@ class NewsApplication: Application() {
 
         startKoin {
             androidContext(this@NewsApplication)
-            modules(networkModule, repositoryModule, domainModule)
+            modules(networkModule, repositoryModule, domainModule, viewModelModule)
         }
     }
 }
