@@ -3,13 +3,13 @@ package andaeys.io.newsapp.repository
 import andaeys.io.newsapp.api.ApiConstant
 import andaeys.io.newsapp.api.ApiService
 import andaeys.io.newsapp.model.TopNewsResponse
-import andaeys.io.newsapp.model.state.NewsStateStatus
 import andaeys.io.newsapp.model.state.TopNewsState
 import kotlinx.coroutines.runBlocking
 import com.google.gson.Gson
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.toList
 import org.junit.Assert
+import org.junit.Assert.assertTrue
 
 import org.junit.Before
 import org.junit.Test
@@ -36,7 +36,7 @@ class TopNewsRepositoryTest {
         //define result
         val jsonString = javaClass.classLoader?.getResource("topnews.json")?.readText()
         val expectedResponse = Gson().fromJson(jsonString, TopNewsResponse::class.java)
-        val expectedTotalArticle = 2
+        val expectedTotalArticle = expectedResponse.totalResults
 
         //stubbing
         `when`(apiService.getTopHeadlines(ApiConstant.COUNTRY, ApiConstant.API_KEY))
@@ -47,8 +47,8 @@ class TopNewsRepositoryTest {
 
         //assertion
         assertEquals(2, result.size)
-        assertEquals(NewsStateStatus.LOADING, result[0].status)
-        assertEquals(NewsStateStatus.SUCCESS, result[1].status)
-        assertEquals(expectedTotalArticle, result[1].totalArticle)
+        assertTrue(result[0] is TopNewsState.Loading)
+        assertTrue(result[1] is TopNewsState.Success)
+        assertEquals(expectedTotalArticle, (result[1] as TopNewsState.Success).totalArticle)
     }
 }

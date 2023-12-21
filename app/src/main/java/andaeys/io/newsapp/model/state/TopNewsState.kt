@@ -1,14 +1,19 @@
 package andaeys.io.newsapp.model.state
 
 import andaeys.io.newsapp.model.Article
+import andaeys.io.newsapp.model.TopNewsResponse
 
-data class TopNewsState(
-    val status: NewsStateStatus = NewsStateStatus.LOADING,
-    val articleList: List<Article> = emptyList(),
-    val totalArticle: Int = 0,
-    val errorMessage:String = ""
-)
+sealed class TopNewsState{
 
-enum class NewsStateStatus {
-    LOADING, SUCCESS, EMPTY, FAILED
+    object Loading: TopNewsState()
+    data class Success(
+        val articleList: List<Article> = emptyList(),
+        val totalArticle: Int = 0
+    ): TopNewsState()
+
+    object Empty: TopNewsState()
+
+    data class Error(
+        val errorMessage: String = "Unknown error"
+    ): TopNewsState()
 }
