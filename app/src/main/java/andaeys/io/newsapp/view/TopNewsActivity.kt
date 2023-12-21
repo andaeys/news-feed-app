@@ -1,7 +1,6 @@
 package andaeys.io.newsapp.view
 
 import andaeys.io.newsapp.model.Article
-import andaeys.io.newsapp.model.dummyArticle
 import andaeys.io.newsapp.model.state.TopNewsState
 import andaeys.io.newsapp.utils.convertToTimeAgo
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
@@ -158,7 +157,7 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
                 model = article.urlToImage?:"",
                 placeholder = null,
                 error = null,
-                contentDescription = "The delasign logo",
+                contentDescription = article.description,
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -215,5 +214,5 @@ fun ErrorState(errorMessage: String, onRetry: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    ArticleListItem(article = dummyArticle(), onArticleClick = { })
+//    ArticleListItem(article = dummyArticle(), onArticleClick = { })
 }
