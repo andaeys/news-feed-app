@@ -42,7 +42,7 @@ class TopNewsRepositoryTest {
         val result = repository.fetchTopNews()
 
         //assertion
-        assertTrue(expectedTotalArticle == result.totalResults)
+        assertTrue(expectedTotalArticle == result.articles.size)
         assertTrue(expectedResponse.articles.contains(result.articles.last()))
     }
 

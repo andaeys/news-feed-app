@@ -1,11 +1,11 @@
 package andaeys.io.newsapp.model.state
 
 import andaeys.io.newsapp.model.Article
-import andaeys.io.newsapp.model.TopNewsResponse
 
 sealed class TopNewsState{
 
     object Loading: TopNewsState()
+
     data class Success(
         val articleList: List<Article> = emptyList(),
         val totalArticle: Int = 0

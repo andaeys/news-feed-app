@@ -7,17 +7,12 @@ import andaeys.io.newsapp.model.TopNews
 class TopNewsRepositoryImpl(private val apiService: ApiService) : TopNewsRepository {
 
     override suspend fun fetchTopNews(): TopNews {
-        val response = apiService.getTopHeadlines(
-            ApiConstant.COUNTRY,
-            ApiConstant.API_KEY
-        )
+        val response = apiService.getTopHeadlines(ApiConstant.COUNTRY, ApiConstant.API_KEY)
         if (response.status!="ok") {
             throw Exception("Error fetching top news")
         }
         return TopNews(
-            articles = response.articles,
-            totalResults = response.totalResults
+            articles = response.articles.filter { it.title!="[Removed]" }
         )
-
     }
 }
