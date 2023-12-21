@@ -12,7 +12,7 @@ class TopNewsRepositoryImpl(private val apiService: ApiService) : TopNewsReposit
             throw Exception("Error fetching top news")
         }
         return TopNews(
-            articles = response.articles.filter { it.title!="[Removed]" }
+            articles = response.articles
         )
     }
 }

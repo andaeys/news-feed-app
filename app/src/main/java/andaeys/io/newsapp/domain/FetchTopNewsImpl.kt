@@ -11,7 +11,11 @@ class FetchTopNewsImpl(private val topNewsRepository: TopNewsRepository) : Fetch
         try {
             val topNews = topNewsRepository.fetchTopNews()
             val topNewsState: TopNewsState = if (topNews.articles.isNotEmpty()) {
-                TopNewsState.Success(articleList = topNews.articles)
+                val filteredTopNews = topNews.articles.filter { it.title!="[Removed]" }
+                TopNewsState.Success(
+                    articleList = filteredTopNews,
+                    totalArticle = filteredTopNews.size
+                )
             } else {
                 TopNewsState.Empty
             }
