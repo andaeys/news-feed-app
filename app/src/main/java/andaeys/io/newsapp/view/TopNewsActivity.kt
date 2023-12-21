@@ -1,6 +1,5 @@
 package andaeys.io.newsapp.view
 
-import andaeys.io.newsapp.R
 import andaeys.io.newsapp.model.Article
 import andaeys.io.newsapp.model.dummyArticle
 import andaeys.io.newsapp.model.state.TopNewsState
@@ -23,14 +22,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -42,11 +37,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TopNewsActivity : ComponentActivity() {
@@ -88,36 +84,37 @@ fun TopNewsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Top News") },
-                actions = {
-                    IconButton(onClick = { onRefresh() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Refresh")
-                    }
-                }
+                title = { Text("Top News") }
             )
         },
         content = {
-            when (state) {
-                is TopNewsState.Loading -> {
-                    // Loading state
-                    LoadingScreen()
-                }
-                is TopNewsState.Success -> {
-                    // Display list of articles
-                    ArticleList(state.articleList, onArticleClick)
-                }
-                is TopNewsState.Empty -> {
-                    // Empty state
-                    EmptyState()
-                }
-                is TopNewsState.Error -> {
-                    // Error state
-                    ErrorState(state.errorMessage) {
-                        // Retry button
-                        onRefresh()
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing = state is TopNewsState.Loading),
+                onRefresh = { onRefresh() }
+            ){
+                when (state) {
+                    is TopNewsState.Loading -> {
+                        // Loading state
+                        LoadingScreen()
+                    }
+                    is TopNewsState.Success -> {
+                        // Display list of articles
+                        ArticleList(state.articleList, onArticleClick)
+                    }
+                    is TopNewsState.Empty -> {
+                        // Empty state
+                        EmptyState()
+                    }
+                    is TopNewsState.Error -> {
+                        // Error state
+                        ErrorState(state.errorMessage) {
+                            // Retry button
+                            onRefresh()
+                        }
                     }
                 }
             }
+
         }
     )
 
@@ -179,17 +176,6 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
         }
 
     }
-}
-
-@Composable
-fun RemoteImage(url: String) {
-    AsyncImage(
-        model = url,
-        placeholder = null,
-        error = painterResource(id = R.drawable.ic_launcher_foreground),
-        contentDescription = "The delasign logo",
-    )
-
 }
 
 @Composable
