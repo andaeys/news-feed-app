@@ -1,5 +1,6 @@
 package andaeys.io.newsapp
 
+import andaeys.io.newsapp.di.domainModule
 import andaeys.io.newsapp.di.networkModule
 import andaeys.io.newsapp.di.repositoryModule
 import android.app.Application
@@ -13,7 +14,7 @@ class NewsApplication: Application() {
 
         startKoin {
             androidContext(this@NewsApplication)
-            modules(networkModule, repositoryModule)
+            modules(networkModule, repositoryModule, domainModule)
         }
     }
 }
