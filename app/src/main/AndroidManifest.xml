@@ -16,6 +16,11 @@
         android:theme="@style/Theme.TopHeadlineNews"
         tools:targetApi="31">
         <activity
+            android:name=".view.NewsDetailActivity"
+            android:exported="false"
+            android:label="@string/title_activity_news_detail"
+            android:theme="@style/Theme.TopHeadlineNews" />
+        <activity
             android:name=".view.TopNewsActivity"
             android:exported="true"
             android:label="@string/title_activity_top_news"

@@ -7,6 +7,7 @@ import andaeys.io.newsapp.model.state.TopNewsState
 import andaeys.io.newsapp.utils.convertToTimeAgo
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -60,6 +61,11 @@ class TopNewsActivity : ComponentActivity() {
                 state = topNewsState,
                 onRefresh = {
                     viewModel.fetchTopNews()
+                },
+                onArticleClick = { article->
+                    val intent = Intent(this, NewsDetailActivity::class.java)
+                    intent.putExtra(EXTRA_URL, article.url)
+                    startActivity(intent)
                 }
             )
         }
