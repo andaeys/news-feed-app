@@ -8,7 +8,8 @@ interface ApiService {
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-        @Query("country") country: String,
-        @Query("apiKey") apiKey: String
+        @Query("country") country: String = ApiConstant.COUNTRY,
+        @Query("apiKey") apiKey: String = ApiConstant.API_KEY,
+        @Query("category") category: String= ApiConstant.CATEGORY,
     ):TopNewsResponse
 }

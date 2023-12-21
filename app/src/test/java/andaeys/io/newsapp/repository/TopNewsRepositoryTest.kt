@@ -1,6 +1,5 @@
 package andaeys.io.newsapp.repository
 
-import andaeys.io.newsapp.api.ApiConstant
 import andaeys.io.newsapp.api.ApiService
 import andaeys.io.newsapp.model.TopNewsResponse
 import com.google.gson.Gson
@@ -35,7 +34,7 @@ class TopNewsRepositoryTest {
         val expectedTotalArticle = expectedResponse.totalResults
 
         //stubbing
-        `when`(apiService.getTopHeadlines(ApiConstant.COUNTRY, ApiConstant.API_KEY))
+        `when`(apiService.getTopHeadlines())
             .thenReturn(expectedResponse)
 
         //executing
@@ -53,7 +52,7 @@ class TopNewsRepositoryTest {
         val expectedResponse = Gson().fromJson(jsonString, TopNewsResponse::class.java)
 
         //stubbing
-        `when`(apiService.getTopHeadlines(ApiConstant.COUNTRY, ApiConstant.API_KEY))
+        `when`(apiService.getTopHeadlines())
             .thenReturn(expectedResponse)
 
         //assertion
@@ -69,7 +68,7 @@ class TopNewsRepositoryTest {
         val expectedError = Exception("Server Error")
 
         //stubbing
-        `when`(apiService.getTopHeadlines(ApiConstant.COUNTRY, ApiConstant.API_KEY))
+        `when`(apiService.getTopHeadlines())
             .thenAnswer { throw expectedError }
 
         //assertion

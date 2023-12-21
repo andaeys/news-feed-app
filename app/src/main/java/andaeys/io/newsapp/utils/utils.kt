@@ -15,7 +15,7 @@ fun convertToTimeAgo(publishedAt: String): String {
     return when {
         duration.toMinutes() < 1 -> "Just now"
         duration.toHours() < 1 -> "${duration.toMinutes()} mins ago"
-        duration.toDays() < 1 -> "${duration.toHours()} hours ago"
+        duration.toDays() < 2 -> "${duration.toHours()} hours ago"
         else -> "${duration.toDays()} days ago"
     }
 }

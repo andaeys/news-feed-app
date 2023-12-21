@@ -1,7 +1,10 @@
 package andaeys.io.newsapp.view
 
+import andaeys.io.newsapp.R
 import andaeys.io.newsapp.model.Article
+import andaeys.io.newsapp.model.dummyArticle
 import andaeys.io.newsapp.model.state.TopNewsState
+import andaeys.io.newsapp.utils.convertToTimeAgo
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -38,7 +41,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TopNewsActivity : ComponentActivity() {
@@ -127,10 +134,9 @@ fun ArticleList(articles: List<Article>, onArticleClick: (Article) -> Unit) {
     LazyColumn(
         contentPadding = PaddingValues(top = 64.dp)
     ) {
-
         items(articles) { article ->
             ArticleListItem(article = article, onArticleClick = { onArticleClick(article) })
-            Divider(modifier = Modifier.padding(horizontal = 16.dp), color = Color.Gray)
+            Divider(modifier = Modifier.padding(horizontal = 16.dp), color = Color.LightGray)
         }
     }
 }
@@ -143,8 +149,41 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
             .clickable { onArticleClick() }
             .padding(16.dp)
     ) {
-        Text(text = article.title, style = typography.titleMedium)
+        Column {
+            AsyncImage(
+                model = article.urlToImage?:"",
+                placeholder = null,
+                error = null,
+                contentDescription = "The delasign logo",
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = article.source?.name?:"",
+                color = Color.DarkGray
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = article.title, style = typography.titleMedium)
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = convertToTimeAgo(article.publishedAt ?: ""),
+                color = Color.LightGray,
+                fontSize = 12.sp,
+                modifier = Modifier.align(Alignment.End)
+            )
+        }
+
     }
+}
+
+@Composable
+fun RemoteImage(url: String) {
+    AsyncImage(
+        model = url,
+        placeholder = null,
+        error = painterResource(id = R.drawable.ic_launcher_foreground),
+        contentDescription = "The delasign logo",
+    )
+
 }
 
 @Composable
@@ -178,4 +217,10 @@ fun ErrorState(errorMessage: String, onRetry: () -> Unit) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    ArticleListItem(article = dummyArticle(), onArticleClick = { })
 }
