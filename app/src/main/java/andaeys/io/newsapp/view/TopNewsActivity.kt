@@ -2,7 +2,6 @@ package andaeys.io.newsapp.view
 
 import andaeys.io.newsapp.model.Article
 import andaeys.io.newsapp.model.state.TopNewsState
-import andaeys.io.newsapp.ui.theme.TopHeadlineNewsTheme
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,6 +11,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,16 +48,13 @@ class TopNewsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TopHeadlineNewsTheme {
-                val topNewsState by viewModel.topNewsState.collectAsState()
-                TopNewsScreen(
-                    state = topNewsState,
-                    onRefresh = {
-                        viewModel.fetchTopNews()
-                    }
-                )
-            }
-
+            val topNewsState by viewModel.topNewsState.collectAsState()
+            TopNewsScreen(
+                state = topNewsState,
+                onRefresh = {
+                    viewModel.fetchTopNews()
+                }
+            )
         }
     }
 }
@@ -127,7 +124,10 @@ fun LoadingScreen() {
 
 @Composable
 fun ArticleList(articles: List<Article>, onArticleClick: (Article) -> Unit) {
-    LazyColumn {
+    LazyColumn(
+        contentPadding = PaddingValues(top = 64.dp)
+    ) {
+
         items(articles) { article ->
             ArticleListItem(article = article, onArticleClick = { onArticleClick(article) })
             Divider(modifier = Modifier.padding(horizontal = 16.dp), color = Color.Gray)
