@@ -89,7 +89,7 @@ fun TopNewsScreen(
         },
         content = {
             SwipeRefresh(
-                state = rememberSwipeRefreshState(isRefreshing = state is TopNewsState.Loading),
+                state = rememberSwipeRefreshState(isRefreshing = false),
                 onRefresh = { onRefresh() }
             ){
                 when (state) {
