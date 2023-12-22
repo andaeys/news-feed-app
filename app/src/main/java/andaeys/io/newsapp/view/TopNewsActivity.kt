@@ -1,7 +1,9 @@
 package andaeys.io.newsapp.view
 
+import andaeys.io.newsapp.R
 import andaeys.io.newsapp.model.Article
 import andaeys.io.newsapp.model.state.TopNewsState
+import andaeys.io.newsapp.ui.theme.grayAccent
 import andaeys.io.newsapp.utils.convertToTimeAgo
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import android.annotation.SuppressLint
@@ -19,12 +21,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -35,12 +38,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -128,7 +137,12 @@ fun LoadingScreen() {
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator()
+        val aComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading))
+        LottieAnimation(
+            composition = aComposition ,
+            iterations = LottieConstants.IterateForever,
+            modifier = Modifier.size(1200.dp)
+        )
     }
 }
 
@@ -158,6 +172,8 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
                 placeholder = null,
                 error = null,
                 contentDescription = article.description,
+                modifier = Modifier.fillMaxSize().clip(MaterialTheme.shapes.small),
+                contentScale = ContentScale.FillBounds
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -169,7 +185,7 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = convertToTimeAgo(article.publishedAt ?: ""),
-                color = Color.LightGray,
+                color = grayAccent,
                 fontSize = 12.sp,
                 modifier = Modifier.align(Alignment.End)
             )
