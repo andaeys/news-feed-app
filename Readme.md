@@ -1,15 +1,8 @@
 # Top News Feed
+<img src="./readme/s.jpg" style="height: 480px;">
 
-<div style="display: flex; flex-direction: row;">
-  <video height="480" controls>
-    <source src="https://github.com/andaeys/news-feed-app/assets/45621171/6a27f02b-8aba-493e-b079-88fa5f727d5b" type="video/mp4">
-<!--   <iframe src="https://github.com/andaeys/news-feed-app/assets/45621171/6a27f02b-8aba-493e-b079-88fa5f727d5b" frameborder="0" allowfullscreen></iframe> -->
-  </video>
-  <img src="./readme/s.jpg" style="height: 480px;">
-<!--   <img src="./readme/r_video.mp4" style="height: 480px;"> -->
-</div>
-
-
+## Features
+- Give you latest top news from [News API](https://newsapi.org)
 
 ## What this project brings to you:
 - **MVVM Design Pattern:** The project follows the MVVM (Model-View-ViewModel) design pattern, incorporating a repository and use case approach for better separation of concerns.
@@ -21,5 +14,4 @@
 - **Unit testing**: for code quality and reliability. Utilizing JUnit and Mockito
 
 
-
-
+[video recorded height=480](https://github.com/andaeys/news-feed-app/assets/45621171/d130380c-8c7f-4ba0-8ce2-1dc6579a72ac)
