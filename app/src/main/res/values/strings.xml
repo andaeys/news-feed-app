@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Top Headline News</string>
+    <string name="app_name">News Feed</string>
     <string name="title_activity_top_news">TopNewsActivity</string>
     <string name="title_activity_news_detail">NewsDetailActivity</string>
 </resources>

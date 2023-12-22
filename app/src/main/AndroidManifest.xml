@@ -9,21 +9,19 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_news"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_news_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TopHeadlineNews"
         tools:targetApi="31">
         <activity
             android:name=".view.NewsDetailActivity"
             android:exported="false"
-            android:label="@string/title_activity_news_detail"
             android:theme="@style/Theme.TopHeadlineNews" />
         <activity
             android:name=".view.TopNewsActivity"
             android:exported="true"
-            android:label="@string/title_activity_top_news"
             android:theme="@style/Theme.TopHeadlineNews">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
