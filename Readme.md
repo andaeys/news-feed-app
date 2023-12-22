@@ -1,7 +1,7 @@
 # Top News Feed
 <div style="display: flex; flex-direction: row;">
   <video width="400" height="250" controls>
-    <source src="./readme/r_video.mp4" type="video/mp4">
+    <source src="https://github.com/andaeys/news-feed-app/assets/45621171/6a27f02b-8aba-493e-b079-88fa5f727d5b">
   </video>
   <img src="./readme/s.jpg" style="height: 480px;">
 </div>
