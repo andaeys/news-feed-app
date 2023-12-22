@@ -1,14 +1,9 @@
 # Top News Feed
-<img src="./readme/ss.jpg" height="480"/>
-<div style="display:flex;">
-  <div style="flex:1;margin-right:5px;">
-    <video width="320" height="240" controls>
-      <source src="./readme/r_video.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex:1;margin-left:5px;">
-    (./readme/s.jpg)
-  </div>
+<div style="display: flex; flex-direction: row;">
+  <video width="400" height="250" controls>
+    <source src="./readme/r_video.mp4" type="video/mp4">
+  </video>
+  <img src="./readme/s.jpg" style="height: 480px;">
 </div>
 
 ## What this project brings to you:
