@@ -2,6 +2,7 @@ package andaeys.io.newsapp.view
 
 import andaeys.io.newsapp.model.Article
 import andaeys.io.newsapp.model.state.TopNewsState
+import andaeys.io.newsapp.ui.theme.grayAccent
 import andaeys.io.newsapp.utils.convertToTimeAgo
 import andaeys.io.newsapp.viewmodels.TopNewsViewModel
 import android.annotation.SuppressLint
@@ -36,6 +37,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -158,6 +160,8 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
                 placeholder = null,
                 error = null,
                 contentDescription = article.description,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -169,7 +173,7 @@ fun ArticleListItem(article: Article, onArticleClick: () -> Unit) {
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = convertToTimeAgo(article.publishedAt ?: ""),
-                color = Color.LightGray,
+                color = grayAccent,
                 fontSize = 12.sp,
                 modifier = Modifier.align(Alignment.End)
             )
