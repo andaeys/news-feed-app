@@ -79,8 +79,8 @@ fun WebViewScreen(url: String) {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
-            ) { webView ->
-                webView.loadUrl(url)
+            ) { wv ->
+                wv.loadUrl(url)
             }
         }
     }

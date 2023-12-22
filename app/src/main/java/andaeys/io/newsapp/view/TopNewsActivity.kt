@@ -2,6 +2,7 @@ package andaeys.io.newsapp.view
 
 import andaeys.io.newsapp.R
 import andaeys.io.newsapp.model.Article
+import andaeys.io.newsapp.model.dummyArticle
 import andaeys.io.newsapp.model.state.TopNewsState
 import andaeys.io.newsapp.ui.theme.grayAccent
 import andaeys.io.newsapp.utils.convertToTimeAgo
@@ -103,21 +104,16 @@ fun TopNewsScreen(
             ){
                 when (state) {
                     is TopNewsState.Loading -> {
-                        // Loading state
                         LoadingScreen()
                     }
                     is TopNewsState.Success -> {
-                        // Display list of articles
                         ArticleList(state.articleList, onArticleClick)
                     }
                     is TopNewsState.Empty -> {
-                        // Empty state
                         EmptyState()
                     }
                     is TopNewsState.Error -> {
-                        // Error state
                         ErrorState(state.errorMessage) {
-                            // Retry button
                             onRefresh()
                         }
                     }
@@ -230,5 +226,5 @@ fun ErrorState(errorMessage: String, onRetry: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-//    ArticleListItem(article = dummyArticle(), onArticleClick = { })
+    ArticleListItem(article = dummyArticle(), onArticleClick = { })
 }
