@@ -1,5 +1,6 @@
 package andaeys.io.newsapp.view
 
+import andaeys.io.newsapp.R
 import andaeys.io.newsapp.model.Article
 import andaeys.io.newsapp.model.state.TopNewsState
 import andaeys.io.newsapp.ui.theme.grayAccent
@@ -23,7 +24,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.typography
@@ -43,6 +43,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -130,7 +134,11 @@ fun LoadingScreen() {
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        CircularProgressIndicator()
+        val aComposition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading))
+        LottieAnimation(
+            composition = aComposition ,
+            iterations = LottieConstants.IterateForever
+        )
     }
 }
 
