@@ -15,3 +15,11 @@
 
 
 [video recorded height=480](https://github.com/andaeys/news-feed-app/assets/45621171/d130380c-8c7f-4ba0-8ce2-1dc6579a72ac)
+
+## Testing
+
+You can run all the unit tests by running this command:
+```
+./gradlew test
+```
+or you can jut run from your IDE
