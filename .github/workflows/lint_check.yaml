@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - '**'
-    paths:
-      - 'app/**'
+#    paths:
+#      - 'app/**'
 
 jobs:
   build:
@@ -33,12 +33,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Run Android Lint
-        run: ./gradlew lint
+#      - name: Run Android Lint
+#        run: ./gradlew lint
+#
+#      - name: Upload lint results
+#        uses: actions/upload-artifact@v2
+#        if: always()
+#        with:
+#          name: lint-results
+#          path: app/build/reports/lint-results*.html
 
-      - name: Upload lint results
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: lint-results
-          path: app/build/reports/lint-results*.html
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck
