@@ -9,17 +9,27 @@ on:
       - '**'
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Set up JDK 11
+      - name: Setup JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
@@ -30,8 +40,13 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
-      - name: Upload APK
+      - name: Run Android Instrumented Tests
+        run: ./gradlew connectedAndroidTest
+        env:
+          ANDROID_SDK_ROOT: ${{ runner.temp }}/android-sdk
+
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v2
         with:
-          name: app-debug-apk
+          name: Debug APK
           path: app/build/outputs/apk/debug/app-debug.apk
