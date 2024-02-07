@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class TopNewsViewModel(private val fetchTopNews: FetchTopNews) : ViewModel() {
@@ -16,12 +15,21 @@ class TopNewsViewModel(private val fetchTopNews: FetchTopNews) : ViewModel() {
 
     fun fetchTopNews() {
         viewModelScope.launch {
-            dummyStateFlow().collect { result ->
-                _topNewsState.value = result
+           _topNewsState.value = TopNewsState.Loading
+            try {
+                val topNews = fetchTopNews.execute()
+                val topNewsState: TopNewsState = if (topNews.articles.isNotEmpty()) {
+                    TopNewsState.Success(
+                        articleList = topNews.articles,
+                        totalArticle = topNews.articles.size
+                    )
+                } else {
+                    TopNewsState.Empty
+                }
+               _topNewsState.value = topNewsState
+            } catch (e: Exception) {
+                _topNewsState.value = TopNewsState.Error(errorMessage = e.message?:"unknown error")
             }
         }
     }
-
-    //TODO: remove once real state logic implemented
-    private fun dummyStateFlow() = flow { emit(TopNewsState.Loading)}
 }
