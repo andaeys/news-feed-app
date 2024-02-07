@@ -15,8 +15,20 @@ class TopNewsViewModel(private val fetchTopNews: FetchTopNews) : ViewModel() {
 
     fun fetchTopNews() {
         viewModelScope.launch {
-            fetchTopNews.execute().collect { result ->
-                _topNewsState.value = result
+           _topNewsState.value = TopNewsState.Loading
+            try {
+                val topNews = fetchTopNews.execute()
+                val topNewsState: TopNewsState = if (topNews.articles.isNotEmpty()) {
+                    TopNewsState.Success(
+                        articleList = topNews.articles,
+                        totalArticle = topNews.articles.size
+                    )
+                } else {
+                    TopNewsState.Empty
+                }
+               _topNewsState.value = topNewsState
+            } catch (e: Exception) {
+                _topNewsState.value = TopNewsState.Error(errorMessage = e.message?:"unknown error")
             }
         }
     }
