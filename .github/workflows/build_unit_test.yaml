@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
 
     steps:
       - uses: actions/checkout@v2
